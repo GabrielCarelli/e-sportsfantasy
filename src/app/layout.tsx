@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "../components/ui/app-sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "../components/ui/app-sidebar";
 
 export const metadata: Metadata = {
   title: "CartoLOL",
@@ -15,13 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <SidebarProvider>
-      <AppSidebar />
-      <body className="bg-zinc-900 min-h-screen">
-        <SidebarTrigger />
-        {children}
+      <body className="bg-zinc-900">
+        <SidebarProvider>
+          <AppSidebar />
+          {/* <SidebarTrigger /> */}
+          {children}
+        </SidebarProvider>
       </body>
-    </SidebarProvider>
     </html>
   );
 }

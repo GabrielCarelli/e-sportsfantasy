@@ -1,4 +1,4 @@
-import { Home, SquareUser, Swords, User } from "lucide-react"
+import { Home, SquareUser, Swords, Trophy, User } from "lucide-react"
 import{
     Sidebar,
     SidebarContent,
@@ -10,6 +10,7 @@ import{
     SidebarMenuButton,
     SidebarMenuItem,
 } from "./sidebar"
+import { Archivo_Black } from "next/font/google"
 
 const items = [
     {
@@ -32,21 +33,32 @@ const items = [
         url: "/Player",
         icon: User
     },
+    {
+        title: "Competitions",
+        url: "/Competitions",
+        icon: Trophy
+    },
 ]
+
+const archivoFont = Archivo_Black({
+    subsets:['latin'],
+    weight: "400",
+  })
 export function AppSidebar(){
     return(
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>CartoLOL</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-xl font-bold">CartoLOL</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
+                                <SidebarMenuItem key={item.title} className="text-xl">
                                     <SidebarMenuButton asChild>
                                         <a href={item.url}>
                                             <item.icon />
-                                            <span>{item.title}</span>
+                                            <span className="text-lg">{item.title}</span>
+
                                         </a>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
