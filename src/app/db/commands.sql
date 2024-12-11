@@ -60,6 +60,7 @@ PRAGMA foreign_keys = ON;
         SELECT * FROM players
 
         ALTER TABLE leagues
-        ADD COLUMN logo TEXT;
+        ADD COLUMN description TEXT;
 
-        UPDATE leagues SET logo = 'https://upload.wikimedia.org/wikipedia/commons/1/13/League_of_Legends_Champions_Korea_logo.svg' WHERE id is 1
+        UPDATE leagues SET logo = 'https://upload.wikimedia.org/wikipedia/commons/c/c6/LEC_Logo.png' WHERE id is 4
+        UPDATE leagues SET description = 'A LEC é a liga europeia, onde tivemos diversos times criativos e divertidos de se assistir.' WHERE id is 4

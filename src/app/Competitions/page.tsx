@@ -5,15 +5,18 @@ import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 type League = {
   id: number; // Corrigido para 'number'
   name: string;
   country: string;
+  description: string;
   logo: string | null; // Aceita string ou null
 };
 
@@ -28,7 +31,7 @@ export default function Competitions() {
   useEffect(() => {
     const fetchLeagues = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/Leagues");
+        const res = await fetch("http://localhost:3000/api/Leagues");
         const data = await res.json();
         setLeagues(data);
       } catch (error) {
@@ -63,7 +66,6 @@ export default function Competitions() {
           {leagues.map((league) => (
             <Card key={league.id} className="bg-zinc-800 shadow-lg">
               <CardHeader>
-                {/* Logo da Liga */}
                 {league.logo ? (
                   <Image
                   width={100}
@@ -80,10 +82,11 @@ export default function Competitions() {
                 <CardTitle className="mt-4 text-white">
                   {league.name}
                 </CardTitle>
+                <CardContent className="text-sm text-zinc-400">{league.description}</CardContent>
               </CardHeader>
-              <CardContent>
-                <p className="text-gray-400 text-sm">País: {league.country}</p>
-              </CardContent>
+              <CardFooter>
+                <Button variant="outline">Detalhes</Button>
+              </CardFooter>
             </Card>
           ))}
         </div>
