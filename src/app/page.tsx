@@ -50,7 +50,7 @@ export default function Home() {
                 <CardTitle className="text-lg text-gray-200 font-extralight text-center">Competições</CardTitle>
                 <CardContent className="text-extralight text-center text-gray-500">Acesse essa página para conferir as competições disponíveis no momento.</CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="ml-14" onClick={() => router.push("/Competitions")}>Competir</Button>
+                  <Button variant="outline" className="ml-14" onClick={() => router.push("/Leagues")}>Competir</Button>
 
                 </CardFooter>
               </CardHeader>

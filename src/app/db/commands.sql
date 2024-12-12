@@ -63,4 +63,4 @@ PRAGMA foreign_keys = ON;
         ADD COLUMN description TEXT;
 
         UPDATE leagues SET logo = 'https://upload.wikimedia.org/wikipedia/commons/c/c6/LEC_Logo.png' WHERE id is 4
-        UPDATE leagues SET description = 'A LEC é a liga europeia, onde tivemos diversos times criativos e divertidos de se assistir.' WHERE id is 4
+        UPDATE leagues SET description = 'A LCK é a liga coreana de league of legends, onde diversas das maiores lendas do league foram forjadas.' WHERE id is 1

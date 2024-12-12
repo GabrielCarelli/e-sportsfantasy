@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import { useRouter } from "next/navigation";
 type League = {
   id: number; // Corrigido para 'number'
   name: string;
@@ -25,20 +25,31 @@ const archivoFont = Archivo_Black({
   weight: "400",
 });
 
-export default function Competitions() {
+export default function Leagues() {
   const [leagues, setLeagues] = useState<League[]>([]); // Definido tipo correto para estado
+  const router = useRouter();
 
   useEffect(() => {
     const fetchLeagues = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/Leagues");
+  
+        if (!res.ok) {
+          console.error("Failed to fetch leagues:", res.status, res.statusText);
+          setLeagues([]);
+          return;
+        }
+  
         const data = await res.json();
-        setLeagues(data);
+  
+        // Ensure data is an array, even if it's empty
+        setLeagues(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Failed to fetch leagues:", error);
+        setLeagues([]);
       }
     };
-
+  
     fetchLeagues();
   }, []);
 
@@ -85,7 +96,7 @@ export default function Competitions() {
                 <CardContent className="text-sm text-zinc-400">{league.description}</CardContent>
               </CardHeader>
               <CardFooter>
-                <Button variant="outline">Detalhes</Button>
+                <Button variant="outline" onClick={() => router.push(`/Leagues/${league.id}`)}>Detalhes</Button>
               </CardFooter>
             </Card>
           ))}

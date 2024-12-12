@@ -34,8 +34,8 @@ const items = [
         icon: User
     },
     {
-        title: "Competitions",
-        url: "/Competitions",
+        title: "Leagues",
+        url: "/Leagues",
         icon: Trophy
     },
 ]
