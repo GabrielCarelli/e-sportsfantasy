@@ -1,5 +1,13 @@
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+
+type Team = {
+  id: number;
+  name: string;
+  league_id: number;
+  logo: string | null;
+};
 
 type League = {
   id: number;
@@ -7,7 +15,9 @@ type League = {
   country: string;
   description: string;
   logo: string | null;
+  teams: Team[];
 };
+
 
 async function getLeague(id: string): Promise<League | null> {
   try {
@@ -16,51 +26,80 @@ async function getLeague(id: string): Promise<League | null> {
     });
 
     if (!response.ok) {
-      console.error('Failed to fetch league details:', response.statusText);
       return null;
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error('Error fetching league:', error);
     return null;
   }
 }
 
-export default async function LeaguePage({ 
-  params 
-}: { 
-  params: { id: string } 
+export default async function LeaguePage({
+  params,
+}: {
+  params: { id: string };
 }) {
   const league = await getLeague(params.id);
 
   if (!league) {
-    notFound(); // Mostra uma página de erro 404
+    notFound();
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-gray-200 flex flex-col items-center w-full">
-      <header className="w-full bg-zinc-900 py-6 text-center text-4xl">
-        <h1>{league?.name}</h1>
-        <p className="text-lg font-thin text-gray-400 mt-2">{league?.description}</p>
-      </header>
-      <main className="flex-1 w-full max-w-5xl px-4 py-8">
-        {league?.logo ? (
+    <div className="min-h-screen bg-zinc-750 text-gray-200 w-full">
+      {/* Header da Liga */}
+      <div className="py-8 text-center">
+        <h1 className="text-4xl font-bold">{league.name}</h1>
+        <p className="text-gray-400">{league.country}</p>
+        {league.logo && (
           <Image
-            width={200}
-            height={200}
             src={league.logo}
             alt={`${league.name} logo`}
-            className="w-48 h-48 object-contain bg-white p-2 rounded-md"
+            width={200}
+            height={200}
+            className="mx-auto mt-4"
           />
-        ) : (
-          <div className="w-48 h-48 bg-gray-700 flex items-center justify-center rounded-md">
-            <p className="text-gray-400 text-sm">Logo indisponível</p>
-          </div>
         )}
-        <p className="mt-4 text-gray-400 text-sm">País: {league?.country}</p>
-      </main>
+        <p className="mt-4 text-lg">{league.description}</p>
+      </div>
+
+      {/* Lista de Times */}
+      <div className="mt-8 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold text-center">Times</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+          {league.teams.length > 0 ? (
+            league.teams.map((team) => (
+              <div
+                key={team.id}
+                className="bg-zinc-800 p-4 rounded-lg shadow-md flex flex-col items-center"
+              >
+                {team.logo ? (
+                  <Image
+                    src={team.logo}
+                    alt={`${team.name} logo`}
+                    width={100}
+                    height={100}
+                    className="rounded-md"
+                  />
+                ) : (
+                  <div className="w-24 h-24 bg-gray-700 flex items-center justify-center rounded-md">
+                    <p className="text-gray-400 text-sm">Logo indisponível</p>
+                  </div>
+                )}
+                <h3 className="mt-4 text-lg font-bold">{team.name}</h3>
+
+                <Button variant={'ghost'}>Informações</Button>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-center col-span-full">
+              Nenhum time encontrado para esta liga.
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

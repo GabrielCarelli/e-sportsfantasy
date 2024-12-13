@@ -60,7 +60,8 @@ PRAGMA foreign_keys = ON;
         SELECT * FROM players
 
         ALTER TABLE leagues
-        ADD COLUMN description TEXT;
+        ADD COLUMN tier TEXT;
 
-        UPDATE leagues SET logo = 'https://upload.wikimedia.org/wikipedia/commons/c/c6/LEC_Logo.png' WHERE id is 4
+        UPDATE teams SET logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYbeziYGdWyEgRULXLVF8UU3fFpzD7CoBeFg&s' WHERE id is 10
         UPDATE leagues SET description = 'A LCK é a liga coreana de league of legends, onde diversas das maiores lendas do league foram forjadas.' WHERE id is 1
+        UPDATE leagues SET tier = '1' WHERE id is 4

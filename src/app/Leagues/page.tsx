@@ -75,7 +75,7 @@ export default function Leagues() {
         {/* Lista de Competições */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {leagues.map((league) => (
-            <Card key={league.id} className="bg-zinc-800 shadow-lg">
+            <Card key={league.id} className="bg-zinc-800 shadow-lg border-0">
               <CardHeader>
                 {league.logo ? (
                   <Image
@@ -83,7 +83,7 @@ export default function Leagues() {
                   height={100}
                     src={league.logo}
                     alt={`${league.name} logo`}
-                    className="w-full h-32 object-contain bg-white p-2 rounded-md"
+                    className="w-full h-32 object-contain p-2 rounded-md"
                   />
                 ) : (
                   <div className="w-full h-32 bg-gray-700 flex items-center justify-center rounded-md">
