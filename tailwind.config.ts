@@ -12,6 +12,9 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			personal: {
+				'deep-blue': "#03214a",
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
